@@ -12,11 +12,13 @@
 
 #include <unistd.h>
 
-int main(int argc, char *argv[])
+int main()
 {
 	pid_t   pid;
 
     pid = getgid();
-    printf("%d\n", pid);
+    ft_printf("%d\n", pid);
+    
     return (0);
+
 }
