@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
     {
         while (argv[2][i])
         {
-            s = convert_to_binary(ft_atoi(argv[2][i]));
+            s = convert_to_binary(ft_atoi(&argv[2][i]));
             j = 0;
             while(s[j])
             {

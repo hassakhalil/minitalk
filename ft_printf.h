@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkhalil <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 00:32:42 by hkhalil           #+#    #+#             */
-/*   Updated: 2022/05/11 00:33:18 by hkhalil          ###   ########.fr       */
+/*   Created: 2022/05/11 22:16:00 by hkhalil           #+#    #+#             */
+/*   Updated: 2022/05/11 22:16:20 by hkhalil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 # include <unistd.h>
-# include <signal.h>
 # include <stdlib.h>
-# include "ft_printf.h"
+# include <stdarg.h>
 
-size_t	ft_strlen(const char *s);
-char	*ft_strjoin(char const *s1, char const *s2);
-int	ft_atoi(const char *nptr);
+int		ft_printf(const char *s, ...);
+void	ft_putchar(char c, int *l);
+int		ft_putstr(char *s, int *l);
+void	ft_putnbr(int n, int *l);
+void	ft_print_base(unsigned long n, char *base, int size, int *l);
 #endif

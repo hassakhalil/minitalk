@@ -16,12 +16,17 @@ char    *s;
 
 void    handler1()
 {
-    s = ft_strjoin(s, '0');
+    s = ft_strjoin(s, "0");
 }
 
 void    handler2()
 {
-    s = ft_strjoin(s, '1');
+    s = ft_strjoin(s, "1");
+}
+
+int convert_to_decimal(char *s)
+{
+    return (0);
 }
 
 int main()

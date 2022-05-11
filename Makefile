@@ -14,13 +14,13 @@ NAME = server
 
 NAME1 = client
 
-SRC = utils.c
+SRC = utils.c ft_printf_utils.c ft_printf.c
 
 OBJ = $(SRC:.c=.o)
 
 CFLAGS = -Wall -Wextra -Werror
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) server.o 
 
 $(NAME1): $(OBJ) client.o
 	cc $(CFLAGS) $(OBJ) client.o -o client
@@ -28,9 +28,9 @@ $(NAME1): $(OBJ) client.o
 all: $(server)
 
 clean:
-	rm -rf $(OBJ) $(B_OBJ) checker_bonus.o push_swap.o
+	rm -rf $(OBJ)  server.o client.o
 
 fclean: clean
-	rm -rf $(NAME) $(B_NAME)
+	rm -rf $(NAME) $(NAME1)
 
 re: fclean all
