@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <stdlib.h>
+#include "minitalk.h"
 
 int ft_size(int n)
 {
