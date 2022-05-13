@@ -11,33 +11,28 @@
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
-int ft_size(int n)
-{
-    int i;
-    i = 0;
-    while (n)
-    {
-        n = n / 2;
-        i++;
-    }
-    return (i);
-}
+#include <stdio.h>
 
 char    *convert_to_binary(int n)
 {
     char    *s;
     int     i;
+    int     k;
+    int     j = 0;
 
-    s = malloc(ft_size(n) * sizeof(char));
-    i = 0;
-    while (n)
+    s = malloc(33 * sizeof(char ));
+    i = 31;
+    while (i >= 0)
     {
-        s[i] = (n % 2) + 48;
-        n = n / 2;
-        i++;
+        k = n >> i;
+        if (k & 1)
+            s[j] = '1';
+        else
+            s[j] = '0';
+        j++;
+        i--;
     }
-    s[i] = 0;
+    s[j] = 0;
     return (s);
 }
 
@@ -46,13 +41,16 @@ int main(int argc, char *argv[])
     int     i;
     int     j;
     char    *s;
+    char    c;
 
     i = 0;
     if (argc == 3)
     {
         while (argv[2][i])
         {
-            s = convert_to_binary(ft_atoi(&argv[2][i]));
+            c = argv[2][i];
+            s = convert_to_binary(ft_atoi(&c));
+            printf("%s\n", s);
             j = 0;
             while(s[j])
             {
@@ -60,6 +58,7 @@ int main(int argc, char *argv[])
                     kill(ft_atoi(argv[1]), SIGUSR1);
                 else
                     kill(ft_atoi(argv[1]), SIGUSR2);
+                sleep(1);
                 j++;
             }
             if (s)
