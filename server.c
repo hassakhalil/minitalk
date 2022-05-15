@@ -14,50 +14,38 @@
 #include <string.h>
 #include <stdio.h>
 
-char    *s = NULL;
-
-void    handler1()
+void    handler(int sig)
 {
-    //s = ft_strjoin(s, "0");
-    printf("0\n");
-}
+    static char c;
+    static int bits;
+    static int n;   
 
-void    handler2()
-{
-    //s = ft_strjoin(s, "1");
-    printf("1\n");
-}
-
-int convert_to_decimal(char *s)
-{
-    int dec_value = 0;
-    int base = 1;
-    int len = 32;
-    int i = len -1;
-
-    while (i >= 0)
+    if (bits == 0)
     {
-        if (s[i] == '1')
-            dec_value += base;
-        base  = base * 2;
-        i--;
+        c = '0';
+        n = 1;
     }
-    return (0);
+    if (sig == SIGUSR2)
+        c = c | n;
+    n = n << 1;
+    bits++;
+    if (bits == 8)
+    {
+        printf("%c", c);
+        bits = 0;
+    }
 }
 
 int main()
 {
 	pid_t   pid;
 
-    pid = getgid();
+    pid = getpid();
     printf("%d\n", pid);
-    pause();
-   // printf("hello its safe above");
-    signal(SIGUSR1, handler1);
-   // printf("hello its safe above");
-    signal(SIGUSR2, handler2);
-    //printf("hello its safe above");
-    //printf("%c", convert_to_decimal(s));
+    signal(SIGUSR1, handler);
+    signal(SIGUSR2, handler);
+    while (1)
+        pause();
     return (0);
 
 }
