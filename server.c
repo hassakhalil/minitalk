@@ -16,13 +16,18 @@
 
 void    handler(int sig)
 {
-    static char c;
-    static int bits;
-    static int n;   
+    static unsigned char c = 0;
+    static int bits = 0;
+    static int n = 0;   
 
+    if (sig == SIGUSR1)
+        dprintf(2, "DBG : [0]\n");
+    if (sig == SIGUSR2)
+        dprintf(2, "DBG : [1]\n");
     if (bits == 0)
     {
-        c = '0';
+        bits = 0;
+        c = 0;
         n = 1;
     }
     if (sig == SIGUSR2)
@@ -31,21 +36,20 @@ void    handler(int sig)
     bits++;
     if (bits == 8)
     {
-        printf("%c", c);
+        write(1, &c, 1);
         bits = 0;
     }
 }
 
 int main()
 {
-	pid_t   pid;
+	int   pid;
 
     pid = getpid();
     printf("%d\n", pid);
     signal(SIGUSR1, handler);
     signal(SIGUSR2, handler);
-    while (1)
+     while (1)
         pause();
     return (0);
-
 }

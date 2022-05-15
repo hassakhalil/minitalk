@@ -13,27 +13,43 @@
 #include "minitalk.h"
 #include <stdio.h>
 
+void    send_bits(int pid, unsigned char c)
+{
+    int     i;
+
+    i = 0;
+    while (i < 8)
+    {
+        if (c & 1)
+            kill(pid, SIGUSR2);
+        else
+            kill(pid, SIGUSR1);
+        c = c >> 1;
+        i++;
+        usleep(500);
+    }
+}
 
 int main(int argc, char *argv[])
 {
     int     i;
-    int     j;
+    int     pid;
 
+    unsigned char*   unicode = malloc(sizeof(unsigned char) * 6);
+    unicode[0] = 'a';
+    unicode[1] = 161;
+    unicode[2] = '\0';
+    unicode[3] = 'a';
+    unicode[4] = '\n';
+    unicode[5] = '\0';
     i = 0;
     if (argc == 3)
     {
-        while (argv[2][i])
+        pid = ft_atoi(argv[1]);
+        // while (argv[2][i])
+        while (unicode[i])
         {
-            j = 8;
-            while (j)
-            {
-                if (argv[2][i] & 1)
-                    kill(ft_atoi(argv[1]), SIGUSR2);
-                else
-                    kill(ft_atoi(argv[1]), SIGUSR1);
-                j++;
-                argv[2][i] = argv[2][i] >> 1;
-            }
+            send_bits(pid, unicode[i]);
             i++;
         }
     }
