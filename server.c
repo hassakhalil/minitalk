@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minitalk.h"
-#include <string.h>
 
 void    handler(int sig)
 {
