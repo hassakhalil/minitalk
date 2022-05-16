@@ -14,7 +14,7 @@ NAME = server
 
 NAME1 = client
 
-SRC = utils.c ft_printf_utils.c ft_printf.c
+SRC = utils.c
 
 OBJ = $(SRC:.c=.o)
 
