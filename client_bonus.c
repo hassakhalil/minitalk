@@ -6,17 +6,16 @@
 /*   By: hkhalil <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:54:42 by hkhalil           #+#    #+#             */
-/*   Updated: 2022/05/18 21:55:07 by hkhalil          ###   ########.fr       */
+/*   Updated: 2022/05/19 20:48:53 by hkhalil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-//static int message = 0;
-
-void    handler()
+void    print_message(int sig)
 {
-    write(1, "signal from server\n", 19);
+	(void)sig;
+    write(1, "received signal from server\n", 29);
 }
 
 void    send_bits(int pid, unsigned char c)
@@ -51,11 +50,10 @@ int main(int argc, char *argv[])
             i++;
         }
         send_bits(pid, argv[2][i]);
-        signal(SIGUSR1, handler);
-        /*if (message == 1)
-            write(1, "signal from server\n", 19);*/
-        while (1)
+        signal(SIGUSR2, print_message);
+		while(1)
             pause();
+        //signal(SIGUSR2, print_message);
     }
     return (0);
 }

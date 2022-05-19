@@ -6,13 +6,14 @@
 /*   By: hkhalil <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:53:34 by hkhalil           #+#    #+#             */
-/*   Updated: 2022/05/18 21:54:10 by hkhalil          ###   ########.fr       */
+/*   Updated: 2022/05/19 20:47:59 by hkhalil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-static int  signalpid = 0;
+static int  signalpid;
+
 
 void    handler(int sig, siginfo_t *info, void *context)
 {
@@ -35,16 +36,14 @@ void    handler(int sig, siginfo_t *info, void *context)
     {
         if (c == 0)
         {
-            printf("ssent     fefwefwefwefwef    \n");
-            kill(signalpid, SIGUSR1);
-            usleep(500);
+            signalpid = info->si_pid;
+            x = &context;
+            kill(signalpid, SIGUSR2);
         }
         else
             write(1, &c, 1);
         bits = 0;
     }
-    x = &context;
-    signalpid = info->si_pid;
 }
 
 int main()
@@ -60,6 +59,11 @@ int main()
     sa.sa_sigaction = &handler;
     sigaction(SIGUSR1, &sa, NULL);
     sigaction(SIGUSR2, &sa, NULL);
+    /*if(signalpid)
+    {
+        printf("sent\n");
+        kill(signalpid, SIGUSR2);
+    }*/
     while (1)
         pause();
     return (0);
