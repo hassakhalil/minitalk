@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
     int     i;
     int     pid;
 
+    signal(SIGUSR2, print_message);
     i = 0;
     if (argc == 3)
     {
@@ -50,10 +51,6 @@ int main(int argc, char *argv[])
             i++;
         }
         send_bits(pid, argv[2][i]);
-        signal(SIGUSR2, print_message);
-		while(1)
-            pause();
-        //signal(SIGUSR2, print_message);
     }
     return (0);
 }
