@@ -29,7 +29,7 @@ void    send_bits(int pid, unsigned char c)
             kill(pid, SIGUSR2);
         else
             kill(pid, SIGUSR1);
-        usleep(500);
+        usleep(100);
         c = c >> 1;
         i++;
     }

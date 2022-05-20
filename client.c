@@ -14,7 +14,7 @@
 
 void    send_bits(int pid, unsigned char c)
 {
-    int     i;
+    int i;
 
     i = 0;
     while (i < 8)

@@ -14,9 +14,9 @@
 
 void    handler(int sig, siginfo_t *info, void *context)
 {
-    static unsigned char c = 0;
-    static int bits = 0;
-    static int n = 0;
+    static unsigned char    c ;
+    static int              bits;
+    static int              n;
 
     (void)context;
     if (bits == 0)
@@ -41,10 +41,9 @@ void    handler(int sig, siginfo_t *info, void *context)
 
 int main()
 {
-	int    pid;
+	int                 pid;
     struct sigaction    sa;
     
-
     pid = getpid();
     ft_putnbr_fd(pid, 1);
     write(1, "\n", 1);

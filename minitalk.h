@@ -18,6 +18,6 @@
 
 size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
-int	ft_atoi(const char *nptr);
+int     ft_atoi(const char *nptr);
 void	ft_putnbr_fd(int n, int fd);
 #endif

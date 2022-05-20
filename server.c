@@ -14,9 +14,9 @@
 
 void    handler(int sig)
 {
-    static unsigned char c = 0;
-    static int bits = 0;
-    static int n = 0;   
+    static unsigned char    c;
+    static int              bits;
+    static int              n;   
 
     if (bits == 0)
     {
